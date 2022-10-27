@@ -13,9 +13,10 @@
 
 ## :tada: Installation
 
-1. Config enviromental variables
-2. Build and run docker with
-
+1. Clone the repository
+2. Clone `.env.example` and rename it to `.env`
+3. Configure enviroment variables 
+4. Build and run docker with
 ```
 docker-compose up -d
 ```
