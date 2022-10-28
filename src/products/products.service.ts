@@ -57,18 +57,25 @@ export class ProductsService {
         .getOne();
     }
 
-    // if (!product) {
-    //   product = await this.productRepository.findOneBy({ term });
-    // }
-
     if (!product) {
       throw new NotFoundException(`Product with term: ${term} not found`);
     }
     return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    const product = await this.productRepository.preload({
+      id,
+      ...updateProductDto,
+    });
+    if (!product)
+      throw new NotFoundException(`Product with id: ${id} does not exist`);
+    try {
+      await this.productRepository.save(product);
+      return product;
+    } catch (error) {
+      this.handleDBExections(error);
+    }
   }
 
   async remove(id: string) {
