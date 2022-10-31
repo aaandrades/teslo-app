@@ -1,11 +1,12 @@
+import { ProductImage } from './product-image.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from 'typeorm';
-import { Tags } from './tags.entity';
 
 @Entity()
 export class Product {
@@ -72,4 +73,10 @@ export class Product {
       .replaceAll(' ', '_')
       .replaceAll("'", '');
   }
+
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {
+    cascade: true,
+    eager: true, // load automatically the relations on all find*
+  })
+  images?: ProductImage[];
 }
