@@ -15,8 +15,9 @@
 
 1. Clone the repository
 2. Clone `.env.example` and rename it to `.env`
-3. Configure enviroment variables 
+3. Configure enviroment variables
 4. Build and run docker with
+
 ```
 docker-compose up -d
 ```
@@ -30,8 +31,8 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# Execute seed to get products
+$ curl --location --request GET 'localhost:3000/api/seed'
 ```
 
 ## :busts_in_silhouette: Stay in touch
